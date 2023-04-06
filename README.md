@@ -1,1 +1,1 @@
-# lara-server
+<h1 align="center">Lara Server</h1>
