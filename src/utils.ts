@@ -6,7 +6,7 @@ export async function existFile(path: string) {
     } catch (error) {
         error;
         
-        return false
+        return false;
     }
 }
 

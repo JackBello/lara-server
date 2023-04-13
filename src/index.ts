@@ -71,7 +71,7 @@ export class LaraServe {
             this.$startRequest(request, connection, this);
 
             serveResponse = await this.processFile(request);
-                
+
             if (serveResponse) return serveResponse;
 
             serveResponse = await this.$handler(request, connection);
@@ -83,7 +83,7 @@ export class LaraServe {
     }
 
     protected async processFile(req: Request) {
-        if (!(this.SETTINGS.statics?.disable === true)) return false;
+        if (!this.SETTINGS.statics?.disable) return false;
 
         const { pathname } = new URLPattern(req.url);
         
@@ -92,7 +92,7 @@ export class LaraServe {
         const extensionIndexFile = this.SETTINGS.statics?.watchTemplateDeno ? ".deno" : ".html";
 
         const fileIndex = await this.detectIndexFile(pathname, extensionIndexFile);
-            
+
         if (fileIndex) fileName = fileIndex;
 
         if (!existFile(fileName)) return false;
@@ -127,7 +127,7 @@ export class LaraServe {
 
         const fileIndex = basePath(`${this.SETTINGS.statics?.folder}${pathname}index${extension}`);
 
-        if (!(await existFile(fileIndex))) return false;
+        if (!(await existFile(fileIndex))) return false;        
 
         return fileIndex;
     }
